@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<style type="text/css">
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        background-image: radial-gradient(white, blue, red)
+    }
+
+    .form {
+        border: 2px solid #ccc;
+        width: 350px;
+        height: 500px;
+        position: relative;
+        left: 500px;
+        top: 50px;
+        background-color: lightgoldenrodyellow;
+        border-radius: 20px;
+        box-shadow: 5px 5px 5px rgb(255, 0, 255);
+        height: auto;
+    }
+
+    .container {
+        margin: 20px;
+    }
+
+    label {
+        display: block;
+        font-size: 20px;
+        margin-bottom: 15px;
+        color: blue;
+    }
+
+    input[type=text] {
+        width: 90%;
+        padding: 5px;
+    }
+
+    input[type=submit] {
+        width: 50%;
+        padding: 10px 5px 10px 5px;
+        font-size: 15px;
+        position: relative;
+        left: 75px;
+        background-color: rgb(255, 0, 0);
+        border: none;
+        border-radius: 10px;
+        color: white;
+    }
+
+    input[type=submit]:hover {
+        background-color: blue;
+    }
+
+    span {
+        color: green;
+    }
+
+    select {
+        color: green;
+        padding: 5px 2px 5px 2px;
+        width: 65%;
+    }
+
+    .error {
+        color: red;
+    }
+</style>
+
+<body>
+
+    <form class="form" name="myform" method="post">
+        <h2 style="text-align: center;color: purple;">Application Form</h2>
+        <div class="container">
+            <label>Full Name</label>
+            <input type="text" name="name">
+            <div class="error" id="nameErr"></div>
+        </div>
+
+        <div class="container">
+            <label>Email</label>
+            <input type="text" name="email">
+            <div class="error" id="emailErr"></div>
+        </div>
+
+
+        <div class="container">
+            <label>Phone No.</label>
+            <input type="text" name="phone" maxlength="10">
+            <div class="error" id="phoneErr"></div>
+        </div>
+
+
+        <div class="container">
+            <label style="display: inline;">Country</label>
+
+            <select name="country">
+                <option>Select</option>
+                <option>India</option>
+                <option>China</option>
+                <option>Japan</option>
+                <option>Pakistan</option>
+            </select>
+            <div class="error" id="countryErr"></div>
+        </div>
+
+        <div class="container">
+            <label style="display: inline;">Gender</label>
+            <input type="radio" name="gender" value="male"><span>Male</span>
+            <input type="radio" name="gender" value="female"><span>Female</span>
+            <input type="radio" name="gender" value="other"><span>Other</span>
+
+            <div class="error" id="genderErr"></div>
+        </div>
+
+        <div class="container">
+            <input type="submit" value="Submit" onclick="return validateform()">
+        </div>
+
+    </form>
+
+    <!-- note:- In this form we used name to get value; -->
+    <!-- and all errors are display at a time beacuse of use 
+(returnform=true/false) click submit button -->
+
+    <script type="text/javascript">
+
+        // it's function for erasing errors
+        // it's work when click submit button
+        function clearErrors() {
+            errors = document.getElementsByClassName('error');
+            for (item of errors) {
+                item.innerHTML = "";
+            }
+        }
+
+        // general function
+
+        function container(getId, prntMsg) {
+            document.getElementById(getId).innerHTML = prntMsg;
+        }
+
+
+        // function for validation
+
+        function validateform() {
+            var name = document.myform.name.value;
+            var email = document.myform.email.value;
+            var phone = document.myform.phone.value;
+            var country = document.myform.country.value;
+            var gender = document.myform.gender.value;
+            var returnform = true;
+
+            // function calling for erase errors
+            clearErrors()
+
+            if (name == "") {
+                container("nameErr", "**Name must be filled out!");
+                returnform = false;
+            }
+
+            if (name.length < 5) {
+                container("nameErr", "**Name must be minimum five char!");
+                returnform = false;
+            }
+
+            if (email == "") {
+                container("emailErr", "**Email must be filled out!");
+                returnform = false;
+            }
+
+            if (email.indexOf("@") == 0) {
+                container("emailErr", "**@ position is wrong!");
+                returnform = false;
+            }
+
+            if (phone.length != 10) {
+                container("phoneErr", "**Phone No. must be 10 digits!");
+                returnform = false;
+            }
+            if (isNaN(phone) == true) {
+                container("phoneErr", "**Phone No. must be only digit value!");
+                returnform = false;
+            }
+
+            if (country == "Select") {
+                container("countryErr", "**Country must be selected!");
+                returnform = false;
+            }
+
+            if (gender == "") {
+                container("genderErr", "**Gender must be selected")
+                returnform = false;
+            }
+
+            return returnform;
+        }
+    </script>
+</body>
+
+</html>

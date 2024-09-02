@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation in JavaScript</title>
+    <style>
+        body{
+            background-color:lawngreen ;
+        }
+        *{
+            box-sizing:border-box;
+            padding: 0;
+            margin: 0;
+        }
+        form
+{
+            width: 50%;
+            left: 25%;
+            top: 10px;
+            position: absolute;
+            padding: 20px 50px 20px 50px;
+            background-color: hotpink;
+        }
+        label:not(.gender){
+            display: block;
+            font-size: 30px;
+            line-height: 50px;
+        }
+        .gender{
+            font-size: 30px;
+            line-height: 50px;
+            margin-left: 10px;
+        }
+        input[type="radio"]:not(#male){
+            margin-left: 100px;
+        }
+        input[type="radio"]{
+            width:24px;
+            height:24px;
+        }
+        input[type="text"],input[type="password"],input[type="email"]{
+            padding: 5px 16px;
+            font-size: 20px;
+            outline: none;
+            border: none;
+            box-shadow: 2px 2px 4px black;
+            width: 100%;
+
+        }
+        .Fname,.Lname{
+            max-width: 49%;
+        }
+        h1{
+            text-align: center;
+            color: blue;
+        }
+        select{
+            width: 100%;
+            font-size: 20px;
+            outline: none;
+            border: none;
+            box-shadow: 2px 2px 4px black;
+            padding: 5px 12px;
+        }
+        .btn{
+            width: 80%;
+            margin-left: 65px;
+            font-size: 27px;
+            padding: 5px 7px;
+            color:white;
+            background-color:red;
+            border: none;
+            border-radius:5%;
+        }
+        .btn:hover{
+            background-color:green;
+        }
+        .error{
+            color: red;
+            padding: 3px;
+        }
+
+            /* This code is to make responsive form */
+ 
+        @media screen and (max-width:900px){
+            form{
+                width:100%;
+                left: 0;
+                top: 100px;
+            }
+            .Fname,.Lname{
+            max-width: 100%;
+            margin: 10px;
+        }
+        input[type="radio"]:not(#male){
+            margin-left:40px;
+        }
+        }
+    </style>
+</head>
+<body>
+    <form action="" name="form">
+        <h1>APPLICATION FORM</h1>
+        <div>
+            <label for="">Full Name</label>
+            <input type="text" name="Fname" placeholder="First Name" class="Fname">
+            <input type="text" name="Lname" placeholder="Last Name" class="Lname">
+            <div id="nameErr" class="error"></div>
+        </div>
+
+        <div>
+            <label for="">Email</label>
+            <input type="email" name="email" placeholder="Enter your email">
+            <div id="emailErr" class="error"></div>
+        </div>
+
+        <div>
+            <label for="">Password</label>
+            <input type="password" name="pass" placeholder="Enter your password">
+            <div id="passErr" class="error"></div>
+        </div>
+
+
+        <div>
+            <label for="">Mobile No.</label>
+            <input type="text" name="mobile" placeholder="Enter your mobile no.">
+            <div id="mobileErr" class="error"></div>
+        </div>
+
+        <div>
+            <label for="">Country</label>
+            <select name="country" id="">
+                <option value="Select country">Select country</option>
+                <option value="India">India</option>
+                <option value="Pakistan">Pakistan</option>
+                <option value="China">China</option>
+                <option value="USA">USA</option>
+                <option value="Bangladesh">Bangladesh</option>
+            </select>
+            <div id="countryErr" class="error"></div>
+        </div>
+
+        <div>
+            <label for="">Gender</label>
+           <input type="radio" name="gender" id="male" value="male"><label class="gender">Male</label>
+           <input type="radio" name="gender" id="female" value="female"><label class="gender">Female</label>
+           <input type="radio" name="gender" id="other" value="other"><label class="gender">Other</label>
+           <div id="genderErr" class="error"></div>
+        </div>
+
+        <div>
+            <input type="Submit" name="submit" class="btn" onclick="return call()">
+        </div>
+    </form>
+</body>
+<script>
+
+    // JavaScript code for validation of form
+
+    function call(){
+
+        // value accessed by name
+
+    var Fname=document.form.Fname.value;
+    var Lname=document.form.Lname.value;
+    var email=document.form.email.value;
+    var pass=document.form.pass.value;
+    var mobile=document.form.mobile.value;
+    var country=document.form.country.value;
+    var gender=document.form.gender.value;
+
+
+        // conditions apply on accessed value 
+
+    if(Fname=="" || Fname.length<5){
+        document.getElementById("nameErr").innerHTML="First name must be minimum five char";
+        return false;
+    }
+    else if(Lname=="" || Lname.length<3){
+        document.getElementById("nameErr").innerHTML="Last name must be minimum three char";
+        return false;
+    }
+    else if(email==""){
+        document.getElementById("emailErr").innerHTML="Please Enter email";
+        return false;
+    }
+    else if(pass=="" || pass.length<8){
+        document.getElementById("LnameErr").innerHTML="Passwrd must be minimum 8 char";
+        return false;
+    }
+    else if(mobile=="" || mobile.length<10){
+        document.getElementById("mobileErr").innerHTML="Phone no. must be minimum 10 numbers"
+        return false;
+    }
+    else if(isNaN(mobile)==true){
+        document.getElementById("mobileErr").innerHTML="Enter only numerical value";
+        return false;
+    }
+    else if(country=="Select country"){
+        document.getElementById("countryErr").innerHTML="plase select country";
+        return false;
+    }
+    else if(gender==""){
+        document.getElementById("genderErr").innerHTML="plase select gender";
+        return false;
+    }
+}
+</script>
+</html>

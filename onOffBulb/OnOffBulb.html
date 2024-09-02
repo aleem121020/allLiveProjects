@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        img{
+            margin: 100px;
+            width: 15%;
+            height: 15%;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div>
+        <img src="offBulb.gif" alt="" id="bulb">
+
+        <button id="on">ON BULB</button>
+        <button id="off">OFF BULB</button>
+    </div>
+
+
+<script>
+    
+    document.querySelector('#on').addEventListener("click",function(){
+    document.querySelector('#bulb').src="onBulb.gif";
+    });
+
+    document.querySelector('#off').addEventListener("click",function(){
+    document.querySelector('#bulb').src="offBulb.gif";
+    });
+
+</script>
+
+
+    
+
+</body>
+</html>

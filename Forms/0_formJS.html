@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Form</title>
+
+    <style>
+        body {
+            background-image: linear-gradient(to left, red, pink, blue);
+        }
+
+        form {
+            border: none;
+            padding: 20px 30px;
+            width: 50%;
+            margin: auto;
+            margin-top: 50px;
+            background-color: white;
+            box-shadow: 7px 7px 7px rgb(55, 55, 55);
+        }
+
+        h1 {
+            text-align: center;
+            color: red;
+            text-transform: uppercase;
+        }
+
+        label {
+            display: inline-block;
+            width: 30%;
+            padding: 10px;
+            font-size: larger;
+            margin-left: 30px;
+            text-shadow: 1px 1px 1px black;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 50%;
+            padding: 6px 10px;
+            font-size: 15px;
+            border: none;
+            box-shadow: 1px 1px 4px rgb(55, 55, 55);
+            outline: 1px dashed red;
+        }
+
+        select {
+            width: 53.5%;
+            padding: 2px 5px;
+            font-size: 20px;
+            border: none;
+            box-shadow: 1px 1px 4px rgb(55, 55, 55);
+            outline: 1px dashed red;
+        }
+
+        .errors {
+            margin-left: 38%;
+            color: red;
+        }
+
+        .btn {
+            width: 50%;
+            position: relative;
+            left: 30%;
+            padding: 8px 10px;
+            margin: 15px;
+            font-size: 20px;
+            border: none;
+            color: blue;
+            background-color: rgb(255, 0, 0);
+            border-radius: 5%;
+            box-shadow: 3px 3px 5px blue;
+        }
+
+        .btn:hover {
+            background-image: linear-gradient(to left, red, pink, blue);
+            color: blue;
+            font-weight: bold;
+            text-shadow: 4px 4px 2px red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="#" name="myform" onsubmit="return validation()" method="post">
+
+        <h1>Application Form</h1>
+
+        <!-- This div for name -->
+        <div>
+            <label>Name</label>
+            <input type="text" name="name" placeholder="Enter your name" autocomplete="none">
+            <div id="nameErr" class="errors"></div>
+        </div>
+
+        <!-- This div for email -->
+        <div>
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Enter your email" autocomplete="none">
+            <div id="emailErr" class="errors"></div>
+        </div>
+
+        <!-- This div for password -->
+        <div>
+            <label>Password</label>
+            <input type="password" name="pass" placeholder="Enter password" autocomplete="none">
+            <div id="passErr" class="errors"></div>
+        </div>
+
+        <!-- This div for Re-Password -->
+        <div>
+            <label>Re-Password</label>
+            <input type="password" name="repass" placeholder="Enter Re-Password" autocomplete="none">
+            <div id="repassErr" class="errors"></div>
+        </div>
+
+        <!-- This div for Phone No. -->
+        <div>
+            <label>Phone no.</label>
+            <input type="text" placeholder="Enter Phone no." name="phone" autocomplete="none">
+            <div id="phoneErr" class="errors"></div>
+        </div>
+
+        <!-- This div for DOB -->
+        <div>
+            <label>DOB</label>
+            <input type="date" name="DOB">
+            <div id="DOBErr" class="errors"></div>
+        </div>
+
+        <!-- This div for state -->
+        <div>
+            <label>State</label>
+            <select name="state">
+                <option value="Select State">Select State</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Rajasthan">Rajasthan</option>
+            </select>
+            <div id="stateErr" class="errors"></div>
+        </div>
+
+        <!-- This div for address -->
+        <div>
+            <label>Address</label>
+            <textarea name="address" cols="46" rows="2" placeholder="Enter full eddress"></textarea>
+            <div id="addressErr" class="errors"></div>
+        </div>
+
+        <!-- This div for submit button -->
+        <div>
+            <button class="btn">SUBMIT</button>
+        </div>
+    </form>
+</body>
+
+
+
+<!-- Form Validation -->
+<script>
+
+    // function to use multiple time
+    function print(getId, msg) {
+        document.getElementById(getId).innerHTML = msg;
+    }
+
+
+    function validation() {
+        // var for accessing values name pass etc.
+        
+        var name = document.myform.name.value;
+        var email = document.myform.email.value;
+        var pass = document.myform.pass.value;
+        var repass = document.myform.repass.value;
+        var phone = document.myform.phone.value;
+        var DOB = document.myform.DOB.value;
+        var state = document.myform.state.value;
+        var address = document.myform.address.value;
+
+
+        // name validation
+
+        if (name == "") {
+            print("nameErr", "**Name must be filled out!")
+            return false
+        }
+
+        if ((name.length < 3) || (name.length > 20)) {
+            print("nameErr", "**Name must be 3 to 20 characters long!")
+            return false
+        }
+
+        // email validation
+
+        if (email == "") {
+            print("emailErr", "**Email must be filled out!")
+            return false
+        }
+
+        if (email.indexOf("@") <= 0) {
+            print("emailErr", "**@ position is incorrect!")
+            return false
+        }
+
+
+        if ((email.indexOf(".") != -4) || (email.inexOf(".") != -3)) {
+            print("emailErr", "**. position is incorrect!")
+            return false
+        }
+
+        // password and re-password validation
+
+        if (pass == "") {
+            print("passErr", "**Password must be filled out!")
+            return false
+        }
+
+        if (pass.length < 8) {
+            print("passErr", "**Password must be minimum 8 char!")
+            return false
+        }
+
+        if (repass != pass) {
+            print("repassErr", "**Re-Pass must be same!")
+            return false
+        }
+
+        //Phone no validation
+
+        if (phone == "") {
+            print("phoneErr", "**Phone no. must be filled out!")
+            return false
+        }
+
+        if (isNaN(phone) == true) {
+            print("phoneErr", "**Only numbers are allowed!");
+            return false;
+        }
+
+        if (phone.length != 10) {
+            print("phoneErr", "**Phone no. must be ten digits!")
+            return false
+        }
+
+        // Date of birth validation
+
+        if (DOB == "") {
+            print("DOBErr", "**DOB must be filled out!")
+            return false
+        }
+
+        // state validation
+
+        if (state == "Select State") {
+            print("stateErr", "**State must be selected!")
+            return false
+        }
+
+        // address validation
+
+        if (address == "") {
+            print("addressErr", "**Address must be filled out!")
+            return false
+        }
+
+        if (address.length < 30) {
+            print("addressErr", "**Address must be contain minimum 30 char")
+            return false;
+        }
+    }
+
+</script>
+
+</html>
